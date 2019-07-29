@@ -3,8 +3,7 @@
     <mat-card-content>
         <mat-list-item *ngFor="let owner of owners">
             <h3 mat-line>
-                <!--<a mat-button [routerLink]="['/owner-edit', owner.dni]">{{owner.name}}</a>-->
-                <a mat-button>{{owner.name}}</a>
+                <a mat-button [routerLink]="['/owner-edit', owner.dni]">{{owner.name}}</a>
             </h3>
         </mat-list-item>
     </mat-card-content>

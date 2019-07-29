@@ -11,29 +11,25 @@ import { NgForm } from '@angular/forms';
 })
 export class OwnerEditComponent implements OnInit, OnDestroy {
 	owner: any = {};
-  sub: Subscription;
+  	sub: Subscription;
 
   	constructor(
-  		private ownerService: OwnerService,
-  		private route: ActivatedRoute,
-      private router: Router,
+		private ownerService: OwnerService,
+		private route: ActivatedRoute,
+		private router: Router,
   	) { }
 
  	ngOnInit() {
- 		this.sub = this.route.params.subscribe(params => {
- 			const id = params['id'];
- 			if(id){ // Se va a editar un owner
- 				 this.ownerService.get(id).subscribe((owner: any) => {
- 					  if(owner){ // Existe un owner con el id ingresado
- 						 this.owner = owner;
- 						 this.owner.href = owner._links.self.href;
- 					  }else{ // No existe un owner con el id ingresado
- 						       console.log(`Owner with id '${id}' not found, returning to list`);
-           				this.goToList();
- 					  }
- 				 })
- 			  }
- 		 });
+		 this.sub = this.route.params.subscribe(params => {
+			const dni = params['dni'];
+			if (dni){
+				this.ownerService.getByDni(dni).subscribe((data: any) => { // Obtener owner por dni
+					if(data){
+						this.owner = data[0];
+					}
+				});
+			}
+		 });
   	}
 
   	ngOnDestroy() {
@@ -50,8 +46,8 @@ export class OwnerEditComponent implements OnInit, OnDestroy {
   		}, error => console.error(error));
   	}
 
-  	remove(href){
-  		this.ownerService.remove(href).subscribe(result => {
+  	remove(id){
+  		this.ownerService.remove(id).subscribe(result => {
       		this.goToList();
     	}, error => console.error(error));
   	}
