@@ -5,7 +5,7 @@
         <mat-list-item *ngFor="let car of cars">
           <img mat-list-avatar src="{{car.giphyUrl}}" alt="{{car.name}}">
           <h3 mat-line>{{car.name}}</h3>
-          <div *ngFor="let owner of owners">
+          <div *ngFor="let owner of owners" mat-line>
             <h5 *ngIf="car.ownerDni == owner.dni" mat-line>Owner: {{owner.name}}</h5>
           </div>
         </mat-list-item>

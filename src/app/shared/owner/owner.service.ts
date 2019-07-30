@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 export class OwnerService {
   public API = '//thawing-chamber-47973.herokuapp.com';
   public OWNERS_API = this.API + '/owners';
+  
   constructor(
   	private http: HttpClient
   ) { }
@@ -38,7 +39,6 @@ export class OwnerService {
   }
 
   remove(id: string){
-    console.log(this.get_href(id));
     return this.http.delete(this.get_href(id));
   }
 }

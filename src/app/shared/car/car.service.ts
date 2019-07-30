@@ -18,10 +18,18 @@ export class CarService {
     return this.http.get(this.CAR_API + '/' + id);
   }
 
+  // Método adicionado: Retorna el enlace href de un carro por su id.
+  get_href(id: string){
+    return ('http:' + this.CAR_API + '/' + id);
+  }
+
   save(car: any): Observable<any> {
     let result: Observable<Object>;
+    console.log(car);
     if (car['href']) {
+      console.log('before put');
       result = this.http.put(car.href, car);
+      console.log('after put');
     } else {
       result = this.http.post(this.CAR_API, car);
     }
@@ -31,4 +39,5 @@ export class CarService {
   remove(href: string) {
     return this.http.delete(href);
   }
+
 }
