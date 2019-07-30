@@ -18,7 +18,7 @@ export class CarService {
     return this.http.get(this.CAR_API + '/' + id);
   }
 
-  // Método adicionado: Retorna el enlace href de un carro por su id.
+  // Método adicionado: Permite obtener el enlace href de un carro a través de su id.
   get_href(id: string){
     return ('http:' + this.CAR_API + '/' + id);
   }

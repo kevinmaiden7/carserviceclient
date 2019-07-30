@@ -75,7 +75,7 @@ export class OwnerEditComponent implements OnInit, OnDestroy {
 					});*/
 					dataCar.href = this.carService.get_href(car.id);
 					dataCar.name = car.name;
-					dataCar.ownerDni = "null";
+					dataCar.ownerDni = null;
 					console.log(car);
 					console.log(dataCar);
 					this.carService.save(dataCar);
