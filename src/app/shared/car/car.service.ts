@@ -25,12 +25,9 @@ export class CarService {
 
   save(car: any): Observable<any> {
     let result: Observable<Object>;
-    console.log(car);
-    if (car['href']) {
-      console.log('before put');
+    if (car['href']) { // El carro ya existe y se va a actualizar
       result = this.http.put(car.href, car);
-      console.log('after put');
-    } else {
+    } else { // Se va a registrar un nuevo carro
       result = this.http.post(this.CAR_API, car);
     }
     return result;

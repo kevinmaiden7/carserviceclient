@@ -49,39 +49,29 @@ export class OwnerEditComponent implements OnInit, OnDestroy {
   	}
 
   	remove(id){
-		this.testCar();
-  		/*this.ownerService.remove(id).subscribe(result => {
+		this.testCar(this.owner.dni);
+  		this.ownerService.remove(id).subscribe(result => {
       		this.goToList();
-    	}, error => console.error(error));*/
+    	}, error => console.error(error));
 	}
 	
 	/* 	Permite verificar si el propietario a borrar tiene un carro asociado.
 		En ese caso, se elimina el enlace.
+		(se compara por dni).
 	*/
-	testCar(){
-		var cars: Array<any> = {};
-		this.carService.getAll().subscribe(data => {
-			cars = data;
-			for(const car of cars){
-				var dataCar: any = {};
-				if(car.ownerDni == this.owner.dni){
-					/*this.carService.get(car.id).subscribe((dataCar: any) => {
-						if(dataCar){
-							console.log(dataCar);
-							dataCar.ownerDni = null;
-							console.log(dataCar);
-							//this.carService.save(dataCar);
-						}
-					});*/
-					dataCar.href = this.carService.get_href(car.id);
-					dataCar.name = car.name;
-					dataCar.ownerDni = null;
-					console.log(car);
-					console.log(dataCar);
-					this.carService.save(dataCar);
+	testCar(dni){
+		this.carService.getAll().subscribe((data) => {
+			for(const car of data){
+				if(car.ownerDni == dni){ // El owner tiene asociado un carro
+					car.href = this.carService.get_href(car.id);
+					car.ownerDni = null;
+					this.carService.save(car).subscribe(() => {
+						console.log("Se desenlazo el owner del carro exitosamente");
+					}, error => console.error(error));
 					break;
 				}
 			}
 		});
 	}
+
 }
