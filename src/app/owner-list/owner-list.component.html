@@ -3,9 +3,13 @@
     <mat-card-content>
         <mat-list-item *ngFor="let owner of owners">
             <h3 mat-line>
+                <input (change)="selectedOwners.push(owner)" type="radio">
                 <a mat-button [routerLink]="['/owner-edit', owner.dni]">{{owner.name}}</a>
             </h3>
         </mat-list-item>
     </mat-card-content>
     <button mat-fab color="primary" [routerLink]="['/owner-add']">Add</button>
+    <button mat-raised-button color="secondary" (click)="delSelectedOwners()" type="button">
+        Delete All Selected
+    </button>
 </mat-card>

@@ -2,26 +2,16 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.2.
 
-## Development server
+Se utiliza el componente llamado `owner-list` para mostrar la lista de owners. Esta vista se accede por la ruta `http://localhost:4200/owner-list`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Se utiliza el servicio `OwnerService` para consumir el API de owners y realizar operaciones sobre esta mediante los métodos del protocolo HTTP.
 
-## Code scaffolding
+Se utiliza el componente llamado `owner-edit` para agregar y editar owners. 
+A través de la ruta `http://localhost:4200/owner-add` se accede a la página para agregar un nuevo owner. También se accede mediante el botón add en la página de lista de owners.
+A través de la ruta `http://localhost:4200/{dni}` se accede a la vista para modificar o eliminar owners. Esta vista es accedida facilmente pulsando sobre el owner que se quiere modificar/borrar en la lista de owners.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Se utiliza el componente llamado `car-owner` para mostrar la lista de los carros con sus propietarios. Esta vista se accede a través de la ruta `http://localhost:4200/car-owner`
 
-## Build
+Se utiliza el servicio `UtilityService` para exponer un método que permite validar la relación owner-carro antes de eliminar un owner. En caso de que un owner este asociado a varios carros, se elimina la unión actualizando el ownerDni = null en los respectivos carros.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

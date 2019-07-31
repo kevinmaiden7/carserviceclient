@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OwnerService } from '../shared/owner/owner.service';
 import { NgForm } from '@angular/forms';
-import { CarService } from '../shared/car/car.service';
+import { UtilityService } from '../shared/utility.service';
 
 @Component({
   selector: 'app-owner-edit',
@@ -18,7 +18,7 @@ export class OwnerEditComponent implements OnInit, OnDestroy {
 		private ownerService: OwnerService,
 		private route: ActivatedRoute,
 		private router: Router,
-		private carService: CarService
+		private utilityService: UtilityService
   	) { }
 
  	ngOnInit() {
@@ -49,29 +49,10 @@ export class OwnerEditComponent implements OnInit, OnDestroy {
   	}
 
   	remove(id){
-		this.testCar(this.owner.dni);
+		this.utilityService.unlinkCar(this.owner.dni); // Validar si el owner tiene un carro asociado
   		this.ownerService.remove(id).subscribe(result => {
       		this.goToList();
     	}, error => console.error(error));
-	}
-	
-	/* 	Permite verificar si el propietario a borrar tiene un carro asociado.
-		En ese caso, se elimina el enlace.
-		(se compara por dni).
-	*/
-	testCar(dni){
-		this.carService.getAll().subscribe((data) => {
-			for(const car of data){
-				if(car.ownerDni == dni){ // El owner tiene asociado un carro
-					car.href = this.carService.get_href(car.id);
-					car.ownerDni = null;
-					this.carService.save(car).subscribe(() => {
-						console.log("Se desenlazo el owner del carro exitosamente");
-					}, error => console.error(error));
-					break;
-				}
-			}
-		});
 	}
 
 }
